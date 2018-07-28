@@ -1,6 +1,7 @@
 package com.example.yt.ytlogistics.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.yt.ytlogistics.R;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 /**
  * Created by chebole on 2018/7/25.
@@ -99,6 +103,21 @@ public class CarlineFragment extends BaseLazyFragment{
                 //webView.loadUrl(url);
                 return false;
             }
+        });
+        RefreshLayout refreshLayout = (RefreshLayout) myView.findViewById(R.id.refreshLayout);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                refreshLayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+            }
+
+
         });
     }
 

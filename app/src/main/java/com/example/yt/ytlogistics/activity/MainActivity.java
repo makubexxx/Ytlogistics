@@ -19,6 +19,7 @@ import com.example.yt.ytlogistics.R;
 import com.example.yt.ytlogistics.adapter.ContentPagerAdapter;
 import com.example.yt.ytlogistics.entity.TabItemModel;
 import com.example.yt.ytlogistics.fragment.CarlineFragment;
+import com.example.yt.ytlogistics.fragment.NearbyFragment;
 import com.example.yt.ytlogistics.view.MyCustomViewPager;
 
 import java.util.ArrayList;
@@ -122,24 +123,18 @@ public class MainActivity extends AppCompatActivity
     private void initDatas() {
         //初始化选项卡子项的文本、超链接model集合
         tabIndicators = new ArrayList<TabItemModel>();
-        tabIndicators.add(new TabItemModel("百度","http://www.baidu.com"));
-        tabIndicators.add(new TabItemModel("CSDN","http://blog.csdn.net"));
-        tabIndicators.add(new TabItemModel("博客园","http://www.cnblogs.com"));
-        tabIndicators.add(new TabItemModel("极客头条","http://geek.csdn.net/mobile"));
-        tabIndicators.add(new TabItemModel("优设","http://www.uisdc.com/"));
-        tabIndicators.add(new TabItemModel("玩Android","http://www.wanandroid.com/index"));
-        tabIndicators.add(new TabItemModel("掘金","https://juejin.im/"));
-
+        tabIndicators.add(new TabItemModel("列表","http://blog.csdn.net"));
+        tabIndicators.add(new TabItemModel("附近","http://www.cnblogs.com"));
         //初始化碎片集合
         tabFragments = new ArrayList<>();
 
-        for(int i=0;i<tabIndicators.size();i++){
-            TabItemModel tabItemModel = tabIndicators.get(i);
+            TabItemModel tabItemModel = tabIndicators.get(0);
 
             Bundle bundle = new Bundle();
             bundle.putString("param", tabItemModel.getTabUrl());
             tabFragments.add(CarlineFragment.getInstance(CarlineFragment.class,bundle));
-        }
+            tabFragments.add(NearbyFragment.getInstance(NearbyFragment.class,bundle));
+
         //实例化Adapter
         contentAdapter = new ContentPagerAdapter(getSupportFragmentManager(),tabIndicators,tabFragments);
         mTabViewPager.setAdapter(contentAdapter);
